@@ -1,54 +1,75 @@
 function onReady() {
-    let todos = [];
-    let currentToDoId = 1;
-    const ADD_TODO_FORM = document.getElementById("addToDoForm");
-    const NEW_TODO_TEXT = document.getElementById("newToDoText");
-    const TODO_LIST = document.getElementById("toDoList");
+    const toDos = [];
 
-    ADD_TODO_FORM.addEventListener('submit', event => {
-        event.preventDefault();
-
-        let title = NEW_TODO_TEXT.value;
-
-        let todoObj = {
-            name: title,
-            id: currentToDoId
-        };
-
-        currentToDoId++;
-
-        todos.push(todoObj);
-
-        console.log(todos);
-
-        let newLi = document.createElement('li'); // <li></li>
-        newLi.textContent = title; // 
-
-        let checkbox = document.createElement('input');
-        checkbox.type = "checkbox";
-
-        let deleteBtn = document.createElement('button');
-        deleteBtn.textContent = "Delete";
-
-
-        deleteBtn.addEventListener('click', function (event) {
-            let todoText = this.parentElement.childNodes[0].nodeValue;
-            todos.forEach(function (todoItem, index) {
-                if (todoItem.name == todoText) {
-                    // delete that item
-                    todos.splice(index, 1);
-                }
-                console.log(todos);
-            })
-            TODO_LIST.removeChild(this.parentElement);
+    function createNewToDo() {
+        const newToDoText = document.getElementById("newToDoText");
+        if (!newToDoText.value) {
+            return;
+        }
+        toDos.push({
+            title = newToDoText.value;
+            complete: false
         });
-        newLi.appendChild(checkbox);
-        newLi.appendChild(deleteBtn);
-        TODO_LIST.appendChild(newLi);
-        NEW_TODO_TEXT.value = "";
-    });
-};
+        newToDoText.value = '';
+        renderTheUI();
+    }
 
-window.onload = function () {
-    onReady();
-};
+    function renderTheUI() {
+        const toDoList = document.getElementById("toDoList");
+        toDoList.textContent = '';
+        toDos.forEach(function (toDo) {
+            const newLi = document.createElement('li');
+            const checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            newLi.textContent = title;
+            toDoList.appendChild(newLi);
+            newLi.appendChild(checkbox);
+        });
+    }
+
+    //toDos.push(todoObj);
+
+    //console.log(toDos);
+
+    //from addtodoform
+    //let todoObj = {
+    //    name: title,
+    //    id: currentToDoId
+
+    //let currentToDoId = 0;
+    //const ADD_TODO_FORM = document.getElementById("addToDoForm");
+
+    //function createNewToDo() {}
+
+    //ADD_TODO_FORM.addEventListener('submit', event => {
+    //  event.preventDefault();
+    //createNewToDo();
+    //});
+
+
+    //let deleteBtn = document.createElement('button');
+    //deleteBtn.textContent = "Delete";
+
+
+    //deleteBtn.addEventListener('click', function (event) {
+    //  let todoText = this.parentElement.childNodes[0].nodeValue;
+    //toDos.forEach(function (todoItem, index) {
+    //  if (todoItem.name == todoText) {
+    // delete that item
+    //    toDos.splice(index, 1);
+    // }
+    // console.log(toDos);
+    // })
+    //   toDoList.appendChild(newLi);
+    //newLi.appendChild(checkbox);.removeChild(this.parentElement);
+    // });
+    // newLi.appendChild(checkbox);
+    //newLi.appendChild(deleteBtn);
+    //   toDoList.appendChild(newLi);
+    //newLi.appendChild(checkbox);.appendChild(newLi);
+    //});
+    //};
+
+    window.onload = function () {
+        onReady();
+    };
