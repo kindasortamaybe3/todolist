@@ -1,0 +1,18 @@
+header {
+    text-align: center;
+    justify-content: center;
+    height: 20vh;
+    color: #ff00dd;
+    font-weight: bold;
+}
+
+#addToDoForm {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#toDoList {
+    text-align: center;
+    font-size: 1em;
+    list-style-type: none;
+}
